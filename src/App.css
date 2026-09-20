@@ -1,0 +1,206 @@
+.stage {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 2.5rem;
+  padding: 2rem;
+  text-align: center;
+}
+
+/* ---------- the word ---------- */
+
+.word-wrap {
+  position: relative;
+  display: inline-block;
+  font-size: clamp(3.5rem, 17vw, 11rem);
+  line-height: 1;
+  padding-top: 0.75em; /* room for the tongue to hover above */
+}
+
+.word {
+  position: relative;
+  margin: 0;
+  font-weight: 900;
+  letter-spacing: 0.04em;
+  font-size: 1em;
+  display: flex;
+}
+
+.letter {
+  display: inline-block;
+  background: linear-gradient(180deg, #ffe9f7 0%, #ff7ad1 55%, #b026ff 100%);
+  -webkit-background-clip: text;
+  background-clip: text;
+  color: transparent;
+  filter: drop-shadow(0 0 0.12em rgba(255, 110, 199, 0.45));
+  animation: nudge var(--lick-duration) ease-in-out infinite;
+  animation-delay: calc(var(--i) / var(--n) * var(--lick-duration) * 0.8);
+  transform-origin: 50% 100%;
+}
+
+/* wet gloss sweeping across the letters, in step with the tongue */
+.shine {
+  position: absolute;
+  inset: 0;
+  font-weight: 900;
+  letter-spacing: 0.04em;
+  pointer-events: none;
+  background: linear-gradient(
+    100deg,
+    transparent 42%,
+    rgba(255, 255, 255, 0.95) 50%,
+    transparent 58%
+  );
+  background-size: 300% 100%;
+  -webkit-background-clip: text;
+  background-clip: text;
+  color: transparent;
+  animation: gloss var(--lick-duration) linear infinite;
+}
+
+/* ---------- the tongue ---------- */
+
+.tongue {
+  position: absolute;
+  top: 0.42em;
+  left: 0;
+  margin-left: -0.3em;
+  font-size: 0.6em;
+  line-height: 1;
+  filter: drop-shadow(0 0.08em 0.12em rgba(0, 0, 0, 0.55));
+  animation: lick var(--lick-duration) cubic-bezier(0.45, 0, 0.55, 1) infinite;
+  will-change: left, transform;
+}
+
+@keyframes lick {
+  0% {
+    left: -4%;
+    transform: translateY(0.35em) rotate(-32deg) scale(0.85, 0.8);
+    opacity: 0;
+  }
+  12% {
+    left: 6%;
+    transform: translateY(0.05em) rotate(-16deg) scale(1, 1.12);
+    opacity: 1;
+  }
+  50% {
+    left: 50%;
+    transform: translateY(-0.04em) rotate(0deg) scale(0.94, 1.28);
+    opacity: 1;
+  }
+  80% {
+    left: 88%;
+    transform: translateY(0.05em) rotate(16deg) scale(1, 1.1);
+    opacity: 1;
+  }
+  100% {
+    left: 104%;
+    transform: translateY(0.35em) rotate(32deg) scale(0.85, 0.8);
+    opacity: 0;
+  }
+}
+
+@keyframes gloss {
+  0% {
+    background-position: 150% 0;
+  }
+  80%,
+  100% {
+    background-position: -150% 0;
+  }
+}
+
+@keyframes nudge {
+  0%,
+  100% {
+    transform: none;
+    filter: drop-shadow(0 0 0.12em rgba(255, 110, 199, 0.45));
+  }
+  6% {
+    transform: translateY(-0.05em) rotate(-3deg) scale(1.07);
+    filter: drop-shadow(0 0 0.3em rgba(255, 170, 225, 0.9));
+  }
+  16% {
+    transform: none;
+    filter: drop-shadow(0 0 0.12em rgba(255, 110, 199, 0.45));
+  }
+}
+
+/* ---------- drips ---------- */
+
+.drip {
+  position: absolute;
+  bottom: 0.1em;
+  width: 0.05em;
+  height: 0.05em;
+  border-radius: 50%;
+  background: rgba(255, 210, 240, 0.8);
+  opacity: 0;
+  animation: drip calc(var(--lick-duration) * 1.5) ease-in infinite;
+}
+
+.drip-1 {
+  left: 22%;
+  animation-delay: 0.4s;
+}
+.drip-2 {
+  left: 55%;
+  animation-delay: 1.2s;
+}
+.drip-3 {
+  left: 80%;
+  animation-delay: 2s;
+}
+
+@keyframes drip {
+  0% {
+    transform: translateY(0) scale(0.6);
+    opacity: 0;
+  }
+  15% {
+    opacity: 0.9;
+  }
+  100% {
+    transform: translateY(0.45em) scale(1.1);
+    opacity: 0;
+  }
+}
+
+/* ---------- chrome ---------- */
+
+.counter {
+  margin: 0;
+  font-size: 0.95rem;
+  letter-spacing: 0.25em;
+  text-transform: uppercase;
+  color: rgba(255, 255, 255, 0.55);
+}
+
+.speed {
+  display: flex;
+  align-items: center;
+  gap: 0.75rem;
+  font-size: 0.75rem;
+  letter-spacing: 0.15em;
+  text-transform: uppercase;
+  color: rgba(255, 255, 255, 0.4);
+}
+
+.speed input {
+  width: min(45vw, 14rem);
+  accent-color: #ff7ad1;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .tongue,
+  .letter,
+  .shine,
+  .drip {
+    animation: none;
+  }
+  .tongue {
+    left: 50%;
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
