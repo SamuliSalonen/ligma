@@ -2,6 +2,7 @@ import { useState } from 'react'
 import './App.css'
 
 const WORD = 'ligma'
+const SUBTITLE = 'eske'
 
 export default function App() {
   const [licks, setLicks] = useState(0)
@@ -32,6 +33,11 @@ export default function App() {
         <span className="drip drip-1" aria-hidden="true" />
         <span className="drip drip-2" aria-hidden="true" />
         <span className="drip drip-3" aria-hidden="true" />
+
+        <span className="salute" aria-hidden="true">
+          <span className="salute-emoji">🖕</span>
+          <span className="salute-label">{SUBTITLE}</span>
+        </span>
       </div>
 
       <p className="counter">licks: {licks}</p>
