@@ -1,0 +1,127 @@
+.board {
+  margin-top: 0.75rem;
+  padding-top: 0.9rem;
+  border-top: 2px solid rgba(255, 255, 255, 0.1);
+  display: flex;
+  flex-direction: column;
+  gap: 0.6rem;
+}
+
+.board-title {
+  display: flex;
+  align-items: baseline;
+  justify-content: space-between;
+  gap: 0.5rem;
+  font-size: 0.8rem;
+  letter-spacing: 0.4em;
+  text-transform: uppercase;
+  color: var(--cyan);
+}
+
+.board-title small {
+  font-family: var(--font-body);
+  font-size: 0.55rem;
+  letter-spacing: 0.15em;
+  color: rgba(255, 255, 255, 0.35);
+}
+
+.board-list {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+  display: flex;
+  flex-direction: column;
+  gap: 0.2rem;
+}
+
+.board-row {
+  display: grid;
+  grid-template-columns: 1.4rem 1fr auto;
+  gap: 0.5rem;
+  align-items: center;
+  padding: 0.3rem 0.4rem;
+  font-size: 0.7rem;
+  background: rgba(255, 255, 255, 0.03);
+}
+
+.board-row:nth-child(1) .board-score { color: #ffe06a; }
+.board-row:nth-child(2) .board-score { color: #e3e3e3; }
+.board-row:nth-child(3) .board-score { color: #e0a06a; }
+
+.board-rank {
+  color: rgba(255, 255, 255, 0.35);
+  font-variant-numeric: tabular-nums;
+}
+
+.board-name {
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+
+.board-score {
+  font-family: var(--font-display);
+  color: var(--lime);
+  font-variant-numeric: tabular-nums;
+}
+
+.board-empty {
+  font-size: 0.65rem;
+  letter-spacing: 0.15em;
+  color: rgba(255, 255, 255, 0.3);
+  padding: 0.4rem;
+}
+
+.board-form {
+  display: grid;
+  grid-template-columns: 1fr auto;
+  gap: 0.4rem;
+}
+
+.board-form input {
+  min-width: 0;
+  padding: 0.5rem 0.6rem;
+  font-family: var(--font-body);
+  font-size: 0.75rem;
+  color: #fff;
+  background: rgba(0, 0, 0, 0.45);
+  border: 2px solid rgba(255, 255, 255, 0.15);
+}
+
+.board-form input:focus {
+  outline: none;
+  border-color: var(--cyan);
+}
+
+.board-form button {
+  padding: 0.5rem 0.7rem;
+  font-family: var(--font-display);
+  font-size: 0.65rem;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+  color: var(--ink);
+  background: linear-gradient(120deg, var(--lime), var(--cyan));
+  border: none;
+  cursor: pointer;
+}
+
+.board-form button:disabled {
+  opacity: 0.5;
+  cursor: wait;
+}
+
+.board-status {
+  margin: 0;
+  font-size: 0.62rem;
+  letter-spacing: 0.1em;
+}
+
+.board-status-error { color: #ff7a9c; }
+.board-status-ok { color: var(--lime); }
+
+.board-note {
+  margin: 0;
+  font-size: 0.55rem;
+  letter-spacing: 0.1em;
+  color: rgba(255, 255, 255, 0.3);
+}

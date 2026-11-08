@@ -1,0 +1,46 @@
+.marquee-stack {
+  position: relative;
+  padding: 6rem 0;
+  background: var(--ink);
+  perspective: 600px;
+  overflow: hidden;
+}
+
+/* the bands are tipped in 3D so they read as a ribbon, not a ticker */
+.marquee {
+  overflow: hidden;
+  white-space: nowrap;
+  transform-style: preserve-3d;
+  transform: rotateX(calc(14deg - var(--row) * 14deg)) rotateZ(calc(-4deg + var(--row) * 4deg));
+  margin-block: -0.1em;
+  border-block: 2px solid rgba(255, 255, 255, 0.08);
+}
+
+.marquee-track {
+  display: inline-flex;
+  animation-name: marquee-run;
+  animation-timing-function: linear;
+  animation-iteration-count: infinite;
+  font-family: var(--font-display);
+  font-size: clamp(2rem, 8vw, 5.5rem);
+  line-height: 1.1;
+}
+
+@keyframes marquee-run {
+  to {
+    transform: translateX(-50%);
+  }
+}
+
+.marquee-hot .marquee-track {
+  color: var(--hot);
+  text-shadow: 0 0 2rem rgba(255, 45, 149, 0.7);
+}
+.marquee-cyan .marquee-track {
+  color: transparent;
+  -webkit-text-stroke: 2px var(--cyan);
+}
+.marquee-lime .marquee-track {
+  color: var(--lime);
+  text-shadow: 0 0 2rem rgba(214, 255, 62, 0.5);
+}

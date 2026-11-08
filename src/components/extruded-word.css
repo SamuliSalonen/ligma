@@ -1,0 +1,26 @@
+.extruded {
+  position: relative;
+  display: inline-grid;
+  transform-style: preserve-3d;
+  font-family: var(--font-display);
+  line-height: 0.85;
+}
+
+/* every layer occupies the same grid cell, then separates along Z */
+.extruded-layer {
+  grid-area: 1 / 1;
+  transform: translateZ(calc(var(--d) * -3px));
+  transform-style: preserve-3d;
+  /* back layers are the dark extruded side, the front layer is the lit face */
+  color: color-mix(in oklab, var(--hot-deep) calc(100% - var(--t) * 100%), #1a0020);
+  white-space: nowrap;
+}
+
+/* the frontmost layer — the one the light hits */
+.extruded-layer:first-child {
+  color: transparent;
+  background: linear-gradient(170deg, #fff 0%, #ffd9f0 28%, var(--hot) 62%, var(--violet) 100%);
+  -webkit-background-clip: text;
+  background-clip: text;
+  filter: drop-shadow(0 0 0.14em rgba(255, 45, 149, 0.65));
+}

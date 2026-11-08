@@ -1,0 +1,113 @@
+.outro {
+  position: relative;
+  min-height: 100vh;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: 4rem;
+  padding: 6rem 1.5rem 3rem;
+  background: radial-gradient(circle at 50% 60%, #35104a 0%, var(--ink) 65%);
+  perspective: 1000px;
+  overflow: hidden;
+}
+
+.outro-stage {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 1.75rem;
+  transform-style: preserve-3d;
+  /* rises and rotates into frame on approach */
+  transform: rotateX(calc((1 - var(--p-in, 0)) * 45deg))
+    translateY(calc((1 - var(--p-in, 0)) * 6rem));
+  opacity: var(--p-in, 0);
+}
+
+.outro-tongue {
+  font-size: clamp(4rem, 16vw, 9rem);
+  line-height: 1;
+  filter: drop-shadow(0 0 2rem rgba(255, 45, 149, 0.7));
+  animation: outro-wave 2.6s ease-in-out infinite;
+}
+
+@keyframes outro-wave {
+  0%, 100% { transform: rotate(-9deg) scale(1); }
+  50% { transform: rotate(9deg) scale(1.08); }
+}
+
+.outro-word {
+  font-size: clamp(3rem, 14vw, 9rem);
+  transform-style: preserve-3d;
+  animation: outro-spin 9s ease-in-out infinite;
+}
+
+@keyframes outro-spin {
+  0%, 100% { transform: rotateY(-16deg) rotateX(4deg); }
+  50% { transform: rotateY(16deg) rotateX(-4deg); }
+}
+
+.outro-note {
+  margin: 0;
+  max-width: 30rem;
+  text-align: center;
+  font-size: 0.85rem;
+  line-height: 1.7;
+  letter-spacing: 0.08em;
+  color: rgba(255, 255, 255, 0.55);
+}
+
+.outro-buttons {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.75rem;
+  justify-content: center;
+}
+
+.outro-mega {
+  font-family: var(--font-display);
+  font-size: 0.8rem;
+  letter-spacing: 0.25em;
+  text-transform: uppercase;
+  color: var(--ink);
+  background: linear-gradient(120deg, #ff3b3b, var(--hot));
+  border: none;
+  padding: 0.9rem 1.6rem;
+  cursor: pointer;
+  animation: mega-throb 1.3s ease-in-out infinite;
+}
+
+@keyframes mega-throb {
+  0%, 100% { transform: scale(1); }
+  50% { transform: scale(1.07); }
+}
+
+.outro-top {
+  font-family: var(--font-display);
+  font-size: 0.8rem;
+  letter-spacing: 0.25em;
+  text-transform: uppercase;
+  color: var(--ink);
+  background: linear-gradient(120deg, var(--lime), var(--cyan));
+  border: none;
+  padding: 0.9rem 1.6rem;
+  cursor: pointer;
+  transition: transform 0.2s ease, box-shadow 0.2s ease;
+  box-shadow: 0 0 0 rgba(45, 226, 230, 0);
+}
+
+.outro-top:hover {
+  transform: translateY(-3px) scale(1.04);
+  box-shadow: 0 0.6rem 2rem rgba(45, 226, 230, 0.45);
+}
+
+.outro-footer {
+  display: flex;
+  gap: 0.75rem;
+  flex-wrap: wrap;
+  justify-content: center;
+  font-size: 0.65rem;
+  letter-spacing: 0.3em;
+  text-transform: uppercase;
+  color: rgba(255, 255, 255, 0.3);
+}

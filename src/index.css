@@ -1,22 +1,118 @@
 :root {
   color-scheme: dark;
-  font-family: system-ui, -apple-system, "Segoe UI", Roboto, sans-serif;
+
+  --hot: #ff2d95;
+  --hot-deep: #b8005e;
+  --cyan: #2de2e6;
+  --violet: #b026ff;
+  --lime: #d6ff3e;
+  --ink: #07030d;
+  --ink-2: #140a22;
+
+  --font-display: "Archivo Black", "Arial Black", system-ui, sans-serif;
+  --font-body: ui-monospace, "SF Mono", Menlo, Consolas, monospace;
+
+  font-family: var(--font-body);
 }
 
 * {
   box-sizing: border-box;
 }
 
-body {
-  margin: 0;
-  min-height: 100vh;
-  display: grid;
-  place-items: center;
-  background: radial-gradient(circle at 50% 35%, #2a1230 0%, #120a18 60%, #07040a 100%);
-  color: #fff;
-  overflow: hidden;
+html {
+  scroll-behavior: smooth;
 }
 
-#root {
-  width: 100%;
+body {
+  margin: 0;
+  background: var(--ink);
+  color: #fff;
+  overflow-x: clip;
+}
+
+/* the splash gate holds the page still until you choose */
+body.locked {
+  overflow: hidden;
+  height: 100vh;
+}
+
+/* calm mode: the opt-out offered on the splash, honoured everywhere */
+body.calm,
+body.calm * {
+  animation-duration: 1.4s !important;
+}
+
+body.calm .cursor-dot,
+body.calm .cursor-ring {
+  display: none;
+}
+
+/* mega mode, via the Konami code or by typing "ligma" */
+body.mega {
+  animation: mega-hue 6s linear infinite;
+}
+
+@keyframes mega-hue {
+  to { filter: hue-rotate(360deg); }
+}
+
+/* the custom cursor replaces the real one, except on real controls */
+body:has(.cursor-dot) {
+  cursor: none;
+}
+
+body:has(.cursor-dot) button,
+body:has(.cursor-dot) input,
+body:has(.cursor-dot) a,
+body:has(.cursor-dot) label {
+  cursor: pointer;
+}
+
+/*
+ * Scroll-velocity skew. pen15 does this with motion values; the store writes
+ * --skew from the same smoothed velocity, so headings lean into the scroll
+ * without React re-rendering.
+ */
+h1,
+h2 {
+  transform: skewY(calc(var(--skew, 0) * 0.35deg));
+}
+
+::selection {
+  background: var(--hot);
+  color: var(--ink);
+}
+
+::-webkit-scrollbar {
+  width: 14px;
+}
+::-webkit-scrollbar-track {
+  background: var(--ink-2);
+}
+::-webkit-scrollbar-thumb {
+  background: linear-gradient(180deg, var(--hot), var(--violet));
+  border-radius: 99px;
+  border: 3px solid var(--ink-2);
+}
+
+h1,
+h2,
+h3 {
+  font-family: var(--font-display);
+  font-weight: 900;
+  letter-spacing: -0.02em;
+  margin: 0;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  html {
+    scroll-behavior: auto;
+  }
+  *,
+  *::before,
+  *::after {
+    animation-duration: 0.001ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.001ms !important;
+  }
 }

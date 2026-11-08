@@ -1,0 +1,73 @@
+/* tall parent = scroll runway; the pinned child is what you actually see */
+.tunnel {
+  position: relative;
+  height: 320vh;
+  background: linear-gradient(180deg, var(--ink) 0%, #1a0530 50%, var(--ink) 100%);
+}
+
+.tunnel-pin {
+  position: sticky;
+  top: 0;
+  height: 100vh;
+  overflow: hidden;
+  display: grid;
+  place-items: center;
+  perspective: 700px;
+  perspective-origin: 50% 50%;
+}
+
+.tunnel-camera {
+  position: absolute;
+  inset: 0;
+  transform-style: preserve-3d;
+  /* the camera flies forward through 14 rings as the section scrolls */
+  transform: translateZ(calc(var(--p, 0) * 7000px)) rotate(calc(var(--p, 0) * 90deg));
+}
+
+.tunnel-ring {
+  position: absolute;
+  inset: 0;
+  transform-style: preserve-3d;
+  transform: translateZ(calc(var(--r) * -500px));
+}
+
+/* each emoji sits on the wall of the corridor, facing the camera */
+.tunnel-emoji {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  font-size: clamp(1.8rem, 4vw, 3rem);
+  transform: rotate(calc(var(--i) / var(--n) * 360deg)) translate(min(42vw, 26rem))
+    rotate(calc(var(--i) / var(--n) * -360deg));
+  filter: drop-shadow(0 0 1rem rgba(255, 45, 149, 0.6));
+}
+
+.tunnel-caption {
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 0.6rem;
+  text-align: center;
+  /* punches in as you pass the midpoint */
+  transform: scale(calc(0.6 + var(--p, 0) * 0.8));
+  opacity: calc(var(--p-in, 0) * 1.2);
+}
+
+.tunnel-caption span {
+  font-size: clamp(0.65rem, 2vw, 0.9rem);
+  letter-spacing: 0.5em;
+  text-transform: uppercase;
+  color: var(--cyan);
+}
+
+.tunnel-caption strong {
+  font-family: var(--font-display);
+  font-size: clamp(2rem, 9vw, 6rem);
+  line-height: 0.9;
+  background: linear-gradient(180deg, #fff, var(--hot) 60%, var(--violet));
+  -webkit-background-clip: text;
+  background-clip: text;
+  color: transparent;
+  filter: drop-shadow(0 0 1.5rem rgba(255, 45, 149, 0.8));
+}

@@ -10,6 +10,7 @@
     "ship": "vite build && node scripts/ship.mjs"
   },
   "dependencies": {
+    "leo-profanity": "^1.9.0",
     "react": "^18.3.1",
     "react-dom": "^18.3.1"
   },

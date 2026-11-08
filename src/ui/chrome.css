@@ -1,0 +1,145 @@
+/* ---------- confetti ---------- */
+
+.confetti {
+  position: fixed;
+  inset: 0;
+  z-index: 90;
+  pointer-events: none;
+  width: 100%;
+  height: 100%;
+}
+
+/* ---------- ticker ---------- */
+
+.ticker {
+  position: fixed;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  z-index: 70;
+  overflow: hidden;
+  white-space: nowrap;
+  background: rgba(8, 3, 14, 0.85);
+  border-top: 2px solid rgba(255, 45, 149, 0.5);
+  pointer-events: none;
+}
+
+.ticker-track {
+  display: inline-flex;
+  animation: ticker-run 40s linear infinite;
+  font-family: var(--font-display);
+  font-size: 0.7rem;
+  letter-spacing: 0.2em;
+  color: var(--hot);
+  padding: 0.35rem 0;
+}
+
+@keyframes ticker-run {
+  to { transform: translateX(-50%); }
+}
+
+/* ---------- sound ---------- */
+
+.sound-button {
+  position: fixed;
+  top: 1rem;
+  right: 1rem;
+  z-index: 80;
+  width: 2.6rem;
+  height: 2.6rem;
+  font-size: 1.1rem;
+  background: rgba(8, 3, 14, 0.8);
+  border: 2px solid rgba(255, 45, 149, 0.5);
+  color: #fff;
+  cursor: pointer;
+  transition: transform 0.15s ease, border-color 0.15s ease;
+}
+
+.sound-button:hover {
+  transform: scale(1.1);
+  border-color: var(--hot);
+}
+
+/* ---------- progress ---------- */
+
+.progress {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 6px;
+  height: 100vh;
+  z-index: 70;
+  background: rgba(255, 255, 255, 0.06);
+  pointer-events: none;
+}
+
+.progress-fill {
+  width: 100%;
+  height: calc(var(--p) * 100%);
+  background: linear-gradient(180deg, var(--violet), var(--hot), var(--lime));
+  box-shadow: 0 0 1rem rgba(255, 45, 149, 0.8);
+}
+
+.progress-head {
+  position: absolute;
+  left: 3px;
+  top: calc(var(--p) * 100%);
+  transform: translate(-50%, -50%);
+  font-size: 1.4rem;
+  filter: drop-shadow(0 0 0.5rem rgba(255, 45, 149, 0.9));
+}
+
+/* ---------- cursor ---------- */
+
+.cursor-dot,
+.cursor-ring {
+  position: fixed;
+  top: 0;
+  left: 0;
+  z-index: 120;
+  pointer-events: none;
+  will-change: transform;
+}
+
+.cursor-dot {
+  font-size: 1.5rem;
+  margin: -0.75rem 0 0 -0.75rem;
+  filter: drop-shadow(0 0 0.5rem rgba(255, 45, 149, 0.9));
+}
+
+.cursor-ring {
+  width: 2.6rem;
+  height: 2.6rem;
+  margin: -1.3rem 0 0 -1.3rem;
+  border: 2px solid rgba(45, 226, 230, 0.7);
+  border-radius: 50%;
+  transition: border-color 0.2s ease;
+}
+
+/* ---------- toast ---------- */
+
+.toast {
+  position: fixed;
+  top: 18%;
+  left: 50%;
+  z-index: 150;
+  padding: 1.1rem 1.8rem;
+  font-family: var(--font-display);
+  font-size: clamp(0.8rem, 3vw, 1.4rem);
+  letter-spacing: 0.1em;
+  text-align: center;
+  color: var(--ink);
+  background: linear-gradient(120deg, var(--lime), var(--cyan));
+  box-shadow: 0 1rem 3rem rgba(0, 0, 0, 0.6);
+  pointer-events: none;
+  animation: toast-in 0.45s cubic-bezier(0.2, 1.5, 0.4, 1);
+}
+
+@keyframes toast-in {
+  from { transform: translate(-50%, 0) scale(0) rotate(-220deg); opacity: 0; }
+  to { transform: translate(-50%, 0) scale(1) rotate(-4deg); opacity: 1; }
+}
+
+.toast {
+  transform: translate(-50%, 0) rotate(-4deg);
+}

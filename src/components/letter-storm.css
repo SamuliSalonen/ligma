@@ -1,0 +1,58 @@
+.storm {
+  position: relative;
+  height: 300vh;
+  background: radial-gradient(ellipse at 50% 45%, #22083b 0%, var(--ink) 60%);
+}
+
+.storm-pin {
+  position: sticky;
+  top: 0;
+  height: 100vh;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: 2rem;
+  perspective: 900px;
+  overflow: hidden;
+}
+
+.storm-word {
+  display: flex;
+  gap: 0.02em;
+  font-size: clamp(3rem, 15vw, 10rem);
+  transform-style: preserve-3d;
+}
+
+/*
+ * Each letter interpolates from its scattered entry pose to identity.
+ * --s is this letter's own progress: staggered so they land one after another,
+ * then clamped to 0..1 so nothing overshoots.
+ */
+.storm-letter {
+  --s: clamp(0, calc((var(--p, 0) * 2.4 - var(--i) * 0.09) * 1.5), 1);
+  display: inline-block;
+  transform-style: preserve-3d;
+  transform: translate3d(
+      calc(var(--x) * 1px * (1 - var(--s))),
+      calc(var(--y) * 1px * (1 - var(--s))),
+      calc(var(--z) * 1px * (1 - var(--s)))
+    )
+    rotateX(calc(var(--rx) * 1deg * (1 - var(--s))))
+    rotateY(calc(var(--ry) * 1deg * (1 - var(--s))));
+  /* never fully transparent, or the pin opens on an empty black screen */
+  opacity: calc(0.14 + var(--s) * 0.86);
+  background: linear-gradient(170deg, #fff 0%, var(--hot) 55%, var(--violet) 100%);
+  -webkit-background-clip: text;
+  background-clip: text;
+  color: transparent;
+  filter: drop-shadow(0 0 calc((1 - var(--s)) * 2rem + 0.3rem) rgba(255, 45, 149, 0.85));
+}
+
+.storm-sub {
+  font-size: clamp(0.6rem, 2vw, 0.85rem);
+  letter-spacing: 0.5em;
+  text-transform: uppercase;
+  color: rgba(255, 255, 255, 0.45);
+  opacity: var(--p-out, 0);
+}
